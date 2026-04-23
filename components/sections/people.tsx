@@ -27,7 +27,11 @@ const carouselBtn: React.CSSProperties = {
   transition: "all 200ms",
 };
 
-export function SectionPeople() {
+type SectionPeopleProps = {
+  eyebrow?: string;
+};
+
+export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeopleProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -52,7 +56,7 @@ export function SectionPeople() {
               className="jv-caps"
               style={{ opacity: 0.55, color: "var(--crema)", marginBottom: 20 }}
             >
-              03 &nbsp;/&nbsp; The People
+              {eyebrow}
             </div>
             <h2
               className="jv-display"

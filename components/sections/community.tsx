@@ -114,7 +114,13 @@ function QuoteMarquee({ quotes, direction = "left", duration = 60, paused, offse
   );
 }
 
-export function SectionCommunity() {
+type SectionCommunityProps = {
+  eyebrow?: string;
+};
+
+export function SectionCommunity({
+  eyebrow = "04  /  The Community",
+}: SectionCommunityProps) {
   const [paused, setPaused] = useState(false);
   const row1 = QUOTES;
   const row2 = [...QUOTES].reverse();
@@ -144,7 +150,7 @@ export function SectionCommunity() {
               className="jv-caps"
               style={{ opacity: 0.55, color: "var(--crema)", marginBottom: 20 }}
             >
-              04 &nbsp;/&nbsp; The Community
+              {eyebrow}
             </div>
             <h2
               className="jv-display"
