@@ -16,6 +16,7 @@ type NavProps = {
 export function Nav({ current = "Home", absolute = true }: NavProps) {
   return (
     <nav
+      className="jv-nav"
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -59,7 +60,10 @@ export function Nav({ current = "Home", absolute = true }: NavProps) {
         </div>
       </Link>
 
-      <div style={{ display: "flex", gap: 32, fontSize: 14, fontWeight: 400 }}>
+      <div
+        className="jv-nav-links"
+        style={{ display: "flex", gap: 32, fontSize: 14, fontWeight: 400 }}
+      >
         {NAV_ITEMS.map((item) => {
           const isActive = item.label === current;
           return (
@@ -83,7 +87,7 @@ export function Nav({ current = "Home", absolute = true }: NavProps) {
         })}
       </div>
 
-      <div className="jv-mono jv-caps" style={{ opacity: 0.55 }}>
+      <div className="jv-mono jv-caps jv-nav-hours" style={{ opacity: 0.55 }}>
         Open today, 7:30 to 18:00
       </div>
     </nav>
