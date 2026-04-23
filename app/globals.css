@@ -95,3 +95,87 @@ button { font-family: inherit; }
 .btn-primary:hover { background: var(--ember); color: var(--ink); }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
 .btn-ghost:hover { border-color: var(--ink); }
+
+/* Mobile pill nav — hidden on desktop, floats bottom on mobile */
+.jv-mnav { display: none; }
+
+.jv-mnav-pill {
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  background: rgba(10, 18, 32, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.jv-mnav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-radius: 999px;
+  min-width: 56px;
+}
+
+.jv-mnav-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  transition: all 180ms;
+}
+
+.jv-mnav-label {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  opacity: 0.75;
+  line-height: 1;
+}
+
+.jv-mnav-item.active .jv-mnav-circle {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: var(--bg);
+}
+.jv-mnav-item.active .jv-mnav-label {
+  color: var(--ink);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .jv-mnav {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 50;
+  }
+  /* Hide desktop nav links + hours so top bar becomes just the logo */
+  .jv-nav-links,
+  .jv-nav-hours {
+    display: none !important;
+  }
+  /* Tighten top nav padding on mobile so logo sits clean */
+  .jv-nav {
+    padding: 18px 20px !important;
+  }
+  /* Clearance so the pill doesn't cover footer copy */
+  .jv-footer {
+    padding-bottom: 110px !important;
+  }
+}

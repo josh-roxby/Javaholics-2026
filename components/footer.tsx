@@ -3,6 +3,7 @@ import { Bean } from "./bean";
 export function Footer() {
   return (
     <footer
+      className="jv-footer"
       style={{
         background: "var(--bg-2)",
         color: "var(--ink-soft)",

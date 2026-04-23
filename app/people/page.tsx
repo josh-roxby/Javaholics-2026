@@ -1,26 +1,28 @@
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
+import { SectionStories } from "@/components/sections/stories";
 import { SectionPeople } from "@/components/sections/people";
 import { SectionCommunity } from "@/components/sections/community";
 
-export const metadata = { title: "People — Javaholics" };
+export const metadata = { title: "People" };
 
 export default function PeoplePage() {
   return (
     <main style={{ background: "var(--bg)" }}>
       <PageHero
         current="People"
-        eyebrow="People"
+        eyebrow="The People"
         title={
           <>
-            The faces{" "}
-            <span style={{ fontStyle: "italic", color: "var(--crema)" }}>behind the bar.</span>
+            The regulars,{" "}
+            <span style={{ fontStyle: "italic", color: "var(--crema)" }}>and the room.</span>
           </>
         }
-        lede="Six humans and a dog. Most of us live around here, and a lot of you do too."
+        lede="A few of the stories behind the seats, the bar, and the mornings we open up. Fairview runs on its regulars."
       />
-      <SectionPeople />
-      <SectionCommunity />
+      <SectionStories />
+      <SectionPeople eyebrow="02  /  Behind the bar" />
+      <SectionCommunity eyebrow="03  /  More voices" />
       <Footer />
     </main>
   );
