@@ -224,16 +224,47 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
     };
 
     let raf = 0;
+    let running = true;
+
     const loop = () => {
+      if (!running) return;
       step();
       ctx.clearRect(0, 0, state.w, state.h);
       for (const b of beans) drawBean(b);
       raf = requestAnimationFrame(loop);
     };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      loop();
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      },
+      { threshold: 0 },
+    );
+    io.observe(wrap);
+
+    const onVis = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener("visibilitychange", onVis);
+
     loop();
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
       ro.disconnect();
       window.removeEventListener("resize", resize);
       wrap.removeEventListener("mousemove", onMove);
@@ -262,7 +293,6 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
         position: "relative",
         width: "100%",
         height,
-        cursor: "none",
         userSelect: "none",
       }}
     >
