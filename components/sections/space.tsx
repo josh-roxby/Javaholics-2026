@@ -1,5 +1,6 @@
-import { Bean } from "../bean";
+import Image from "next/image";
 import { WobblyRule } from "../wobbly-rule";
+import { MEDIA } from "@/lib/media";
 
 const STATS = [
   { n: "2019", l: "Opened" },
@@ -84,38 +85,47 @@ export function SectionSpace() {
               overflow: "hidden",
             }}
           >
+            <Image
+              src={MEDIA.interior}
+              alt="Javaholics, interior on a morning"
+              fill
+              sizes="(max-width: 768px) 100vw, 440px"
+              style={{ objectFit: "cover" }}
+            />
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "radial-gradient(ellipse at 50% 30%, rgba(216,120,80,0.12), transparent 60%)",
+                  "linear-gradient(to bottom, rgba(10,18,32,0.15), rgba(10,18,32,0.55))",
               }}
             />
             <div
               className="jv-mono jv-caps"
-              style={{ position: "absolute", top: 16, left: 16, opacity: 0.45 }}
+              style={{
+                position: "absolute",
+                top: 16,
+                left: 16,
+                opacity: 0.75,
+                color: "var(--ink)",
+                textShadow: "0 1px 4px rgba(0,0,0,0.5)",
+              }}
             >
               Fig. 01
             </div>
             <div
               className="jv-mono jv-caps"
-              style={{ position: "absolute", bottom: 16, left: 16, right: 16, opacity: 0.45 }}
-            >
-              A morning, Merville Ave
-            </div>
-            <div
               style={{
                 position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "var(--roast)",
-                opacity: 0.4,
+                bottom: 16,
+                left: 16,
+                right: 16,
+                opacity: 0.75,
+                color: "var(--ink)",
+                textShadow: "0 1px 4px rgba(0,0,0,0.5)",
               }}
             >
-              <Bean size={120} variant={1} />
+              A morning, Merville Ave
             </div>
           </div>
 
