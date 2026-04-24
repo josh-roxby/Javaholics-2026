@@ -35,7 +35,8 @@ export function Hero() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          padding: "140px 48px 24px",
+          padding:
+            "var(--hero-top) var(--section-px) var(--hero-bottom)",
           textAlign: "center",
           position: "relative",
         }}
@@ -53,9 +54,9 @@ export function Hero() {
         </div>
 
         <h1
-          className="jv-display"
+          className="jv-display jv-hero-title"
           style={{
-            fontSize: "clamp(34px, 4.6vw, 68px)",
+            fontSize: "clamp(30px, 4.6vw, 68px)",
             lineHeight: 1.08,
             margin: "0 0 8px",
             maxWidth: 1200,
@@ -64,7 +65,6 @@ export function Hero() {
             opacity: mounted ? 1 : 0,
             transition: "all 1000ms cubic-bezier(.2,.7,.3,1) 150ms",
             fontWeight: 400,
-            whiteSpace: "nowrap",
           }}
         >
           A coffee shop for{" "}
@@ -92,6 +92,8 @@ export function Hero() {
             display: "flex",
             gap: 10,
             marginTop: 28,
+            flexWrap: "wrap",
+            justifyContent: "center",
             opacity: mounted ? 1 : 0,
             transition: "opacity 800ms 700ms",
           }}

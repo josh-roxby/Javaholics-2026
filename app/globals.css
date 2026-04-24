@@ -18,6 +18,27 @@
   --crema: #C89B6C;
   --ember: #D87850;
   --navy: #1A2847;
+
+  /* Responsive spacing tokens — shrink on mobile so layouts stop overflowing */
+  --section-py: 140px;
+  --section-px: 48px;
+  --container-px: 48px;
+  --nav-py: 22px;
+  --nav-px: 48px;
+  --hero-top: 140px;
+  --hero-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: 72px;
+    --section-px: 20px;
+    --container-px: 20px;
+    --nav-py: 14px;
+    --nav-px: 20px;
+    --hero-top: 96px;
+    --hero-bottom: 16px;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -26,6 +47,8 @@ html, body {
   margin: 0;
   padding: 0;
   background: var(--bg);
+  /* Prevent any child with a pixel-fixed width from pushing the viewport wide on mobile */
+  overflow-x: clip;
 }
 
 body {
@@ -76,6 +99,27 @@ button { font-family: inherit; }
   gap: 3rem;
   animation: jv-marquee 60s linear infinite;
   white-space: nowrap;
+}
+
+/* Hero headline: stays single-line on desktop per the design; wraps on mobile */
+.jv-hero-title {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .jv-hero-title {
+    white-space: normal;
+  }
+  .jv-hero-title br {
+    display: none;
+  }
+}
+
+/* Landing marquee scales down on mobile */
+@media (max-width: 768px) {
+  .jv-marquee {
+    font-size: 18px !important;
+    gap: 1.5rem;
+  }
 }
 
 .btn {
@@ -169,10 +213,6 @@ button { font-family: inherit; }
   .jv-nav-links,
   .jv-nav-hours {
     display: none !important;
-  }
-  /* Tighten top nav padding on mobile so logo sits clean */
-  .jv-nav {
-    padding: 18px 20px !important;
   }
   /* Clearance so the pill doesn't cover footer copy */
   .jv-footer {
