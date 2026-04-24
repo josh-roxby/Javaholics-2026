@@ -40,11 +40,23 @@ export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeoplePr
   };
 
   return (
-    <section style={{ background: "var(--bg)", color: "var(--ink)", padding: "140px 0 140px" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+    <section
+      style={{
+        background: "var(--bg)",
+        color: "var(--ink)",
+        padding: "var(--section-py) 0",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "0 var(--container-px)",
+        }}
+      >
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "1fr auto auto",
             alignItems: "end",
             gap: 48,
@@ -59,7 +71,7 @@ export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeoplePr
               {eyebrow}
             </div>
             <h2
-              className="jv-display"
+              className="jv-display jv-section-title"
               style={{
                 fontSize: "clamp(44px, 6vw, 84px)",
                 margin: 0,
@@ -76,7 +88,7 @@ export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeoplePr
           >
             Six humans and a dog. Most of us live around here.
           </div>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div className="jv-people-arrows" style={{ display: "flex", gap: 10 }}>
             <button onClick={() => scrollBy(-1)} aria-label="Previous" style={carouselBtn}>
               ←
             </button>
@@ -95,13 +107,14 @@ export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeoplePr
           gap: 20,
           overflowX: "auto",
           scrollSnapType: "x mandatory",
-          padding: "8px 48px 24px",
+          padding: "8px var(--container-px) 24px",
           scrollbarWidth: "none",
         }}
       >
         {PEOPLE.map((p, i) => (
           <div
             key={i}
+            className="jv-people-card"
             onMouseEnter={() => setHover(i)}
             onMouseLeave={() => setHover(null)}
             style={{

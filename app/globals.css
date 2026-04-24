@@ -138,6 +138,22 @@ button { font-family: inherit; }
   .jv-section-title {
     font-size: clamp(32px, 9vw, 56px) !important;
   }
+  /* People carousel — smaller cards, hide arrow buttons (swipe handles it) */
+  .jv-people-card {
+    flex-basis: 240px !important;
+    height: 340px !important;
+  }
+  .jv-people-arrows {
+    display: none !important;
+  }
+  /* Community marquee — smaller quote cards + thinner edge fades */
+  .jv-quote-card {
+    width: 240px !important;
+    height: 160px !important;
+  }
+  .jv-edge-fade {
+    width: 40px !important;
+  }
 }
 
 .btn {

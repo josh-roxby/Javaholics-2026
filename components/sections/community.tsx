@@ -21,6 +21,7 @@ function QuoteCard({ q }: { q: Quote }) {
   const [hover, setHover] = useState(false);
   return (
     <figure
+      className="jv-quote-card"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -130,15 +131,21 @@ export function SectionCommunity({
       style={{
         background: "var(--bg-2)",
         color: "var(--ink)",
-        padding: "140px 0 140px",
+        padding: "var(--section-py) 0",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 48px" }}>
+      <div
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "0 var(--container-px)",
+        }}
+      >
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "1fr auto",
             alignItems: "end",
             gap: 48,
@@ -153,7 +160,7 @@ export function SectionCommunity({
               {eyebrow}
             </div>
             <h2
-              className="jv-display"
+              className="jv-display jv-section-title"
               style={{
                 fontSize: "clamp(40px, 5.5vw, 72px)",
                 margin: 0,
@@ -165,7 +172,10 @@ export function SectionCommunity({
               <span style={{ fontStyle: "italic", color: "var(--crema)" }}>the regulars.</span>
             </h2>
           </div>
-          <div className="jv-mono jv-caps" style={{ opacity: 0.45, whiteSpace: "nowrap" }}>
+          <div
+            className="jv-mono jv-caps jv-grid-header-meta"
+            style={{ opacity: 0.45, whiteSpace: "nowrap" }}
+          >
             A few of the many
           </div>
         </div>
@@ -187,6 +197,7 @@ export function SectionCommunity({
       </div>
 
       <div
+        className="jv-edge-fade"
         style={{
           position: "absolute",
           top: 0,
@@ -199,6 +210,7 @@ export function SectionCommunity({
         }}
       />
       <div
+        className="jv-edge-fade"
         style={{
           position: "absolute",
           top: 0,
