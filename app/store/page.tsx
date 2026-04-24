@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { Bean } from "@/components/bean";
+import { MEDIA } from "@/lib/media";
 
 export const metadata = { title: "Store" };
 
@@ -8,6 +10,7 @@ export default function StorePage() {
   return (
     <main
       style={{
+        position: "relative",
         minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
@@ -15,6 +18,33 @@ export default function StorePage() {
         color: "var(--ink)",
       }}
     >
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src={MEDIA.machine}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", opacity: 0.28 }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(10,18,32,0.65), rgba(10,18,32,0.92))",
+          }}
+        />
+      </div>
+
       <Nav current="Store" />
 
       <section
@@ -26,6 +56,7 @@ export default function StorePage() {
           padding: "var(--hero-top) var(--section-px) 60px",
           textAlign: "center",
           position: "relative",
+          zIndex: 1,
         }}
       >
         <div style={{ maxWidth: 680 }}>
@@ -100,7 +131,9 @@ export default function StorePage() {
         </div>
       </section>
 
-      <Footer />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Footer />
+      </div>
     </main>
   );
 }
