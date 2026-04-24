@@ -23,7 +23,7 @@ export default function StorePage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "120px 48px 60px",
+          padding: "var(--hero-top) var(--section-px) 60px",
           textAlign: "center",
           position: "relative",
         }}
@@ -54,7 +54,7 @@ export default function StorePage() {
           </div>
 
           <h1
-            className="jv-display"
+            className="jv-display jv-section-title"
             style={{
               fontSize: "clamp(40px, 5.6vw, 76px)",
               margin: 0,

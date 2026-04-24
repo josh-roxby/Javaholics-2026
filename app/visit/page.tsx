@@ -21,13 +21,13 @@ export default function VisitPage() {
           flex: 1,
           display: "flex",
           alignItems: "center",
-          padding: "110px 48px 60px",
+          padding: "var(--hero-top) var(--section-px) 60px",
         }}
       >
         <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto" }}>
           <div
+            className="jv-grid-stack"
             style={{
-              display: "grid",
               gridTemplateColumns: "1fr 1.3fr",
               gap: 56,
               alignItems: "center",
@@ -41,7 +41,7 @@ export default function VisitPage() {
                 Visit
               </div>
               <h1
-                className="jv-display"
+                className="jv-display jv-section-title"
                 style={{
                   fontSize: "clamp(36px, 4.6vw, 64px)",
                   margin: 0,
