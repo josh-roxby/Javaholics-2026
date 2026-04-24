@@ -127,6 +127,30 @@ button { font-family: inherit; }
   .jv-hero-title br {
     display: none;
   }
+  /* Shorter hero on mobile so the next section teases below the fold */
+  .jv-hero {
+    height: 78vh !important;
+    min-height: 520px !important;
+    max-height: 720px !important;
+  }
+  /* Beans fill the entire hero on mobile and pour from top to bottom.
+     Text sits in front of them. */
+  .jv-hero-beans {
+    position: absolute !important;
+    inset: 0 !important;
+    flex: none !important;
+    min-height: 0 !important;
+    z-index: 1;
+  }
+  .jv-hero-text {
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto !important;
+  }
+  /* "move the cursor" hint doesn't apply on touch devices */
+  .jv-hero-hint {
+    display: none;
+  }
 }
 
 /* Landing marquee scales down on mobile */

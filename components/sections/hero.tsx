@@ -14,6 +14,7 @@ export function Hero() {
 
   return (
     <section
+      className="jv-hero"
       style={{
         position: "relative",
         height: "100vh",
@@ -29,6 +30,7 @@ export function Hero() {
       <Nav current="Home" />
 
       <div
+        className="jv-hero-text"
         style={{
           flex: "0 0 58%",
           display: "flex",
@@ -103,7 +105,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div style={{ flex: 1, position: "relative", minHeight: 200 }}>
+      <div
+        className="jv-hero-beans"
+        style={{ flex: 1, position: "relative", minHeight: 200 }}
+      >
         <div
           style={{
             position: "absolute",
@@ -118,7 +123,7 @@ export function Hero() {
         />
         <BeanField height="100%" count={140} />
         <div
-          className="jv-mono jv-caps"
+          className="jv-mono jv-caps jv-hero-hint"
           style={{
             position: "absolute",
             bottom: 20,
