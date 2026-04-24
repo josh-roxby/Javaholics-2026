@@ -4,6 +4,7 @@ import { LOCAL_STORIES, type LocalStory } from "@/lib/stories";
 function StoryPortrait({ story, index }: { story: LocalStory; index: number }) {
   return (
     <div
+      className="jv-story-portrait"
       style={{
         aspectRatio: "4 / 5",
         background: "var(--bg-2)",
@@ -68,7 +69,7 @@ function StoryPortrait({ story, index }: { story: LocalStory; index: number }) {
 
 function StoryBody({ story, index }: { story: LocalStory; index: number }) {
   return (
-    <div>
+    <div className="jv-story-body">
       <div
         className="jv-mono jv-caps"
         style={{ opacity: 0.55, color: "var(--crema)", marginBottom: 16 }}
@@ -142,11 +143,17 @@ function StoryBody({ story, index }: { story: LocalStory; index: number }) {
 
 export function SectionStories() {
   return (
-    <section style={{ background: "var(--bg)", color: "var(--ink)", padding: "140px 48px" }}>
+    <section
+      style={{
+        background: "var(--bg)",
+        color: "var(--ink)",
+        padding: "var(--section-py) var(--section-px)",
+      }}
+    >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "1fr auto",
             alignItems: "end",
             gap: 48,
@@ -161,7 +168,7 @@ export function SectionStories() {
               01 &nbsp;/&nbsp; The Stories
             </div>
             <h2
-              className="jv-display"
+              className="jv-display jv-section-title"
               style={{
                 fontSize: "clamp(44px, 6vw, 84px)",
                 margin: 0,
@@ -177,21 +184,24 @@ export function SectionStories() {
             </h2>
           </div>
           <div
-            className="jv-mono jv-caps"
+            className="jv-mono jv-caps jv-grid-header-meta"
             style={{ opacity: 0.45, whiteSpace: "nowrap" }}
           >
             A few of the many
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 120 }}>
+        <div
+          className="jv-stories-list"
+          style={{ display: "flex", flexDirection: "column", gap: 120 }}
+        >
           {LOCAL_STORIES.map((story, i) => {
             const portraitFirst = i % 2 === 0;
             return (
               <article
                 key={story.slug}
+                className="jv-story-row jv-grid-stack"
                 style={{
-                  display: "grid",
                   gridTemplateColumns: "minmax(280px, 440px) 1fr",
                   gap: 72,
                   alignItems: "center",

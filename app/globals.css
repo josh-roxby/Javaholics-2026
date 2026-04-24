@@ -27,6 +27,8 @@
   --nav-px: 48px;
   --hero-top: 140px;
   --hero-bottom: 24px;
+  --pagehero-top: 160px;
+  --pagehero-bottom: 100px;
 }
 
 @media (max-width: 768px) {
@@ -38,6 +40,8 @@
     --nav-px: 20px;
     --hero-top: 96px;
     --hero-bottom: 16px;
+    --pagehero-top: 108px;
+    --pagehero-bottom: 64px;
   }
 }
 
@@ -153,6 +157,25 @@ button { font-family: inherit; }
   }
   .jv-edge-fade {
     width: 40px !important;
+  }
+  /* Stories (/people): portrait first on mobile, tighter row gap, capped portrait width */
+  .jv-stories-list {
+    gap: 72px !important;
+  }
+  .jv-story-row .jv-story-portrait {
+    order: 0;
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .jv-story-row .jv-story-body {
+    order: 1;
+  }
+  /* Footer: stack the bottom copyright row on mobile */
+  .jv-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
   }
 }
 

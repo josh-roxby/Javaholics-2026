@@ -14,7 +14,8 @@ export function PageHero({ current, eyebrow, title, lede }: PageHeroProps) {
         position: "relative",
         background: "var(--bg)",
         color: "var(--ink)",
-        padding: "160px 48px 100px",
+        padding:
+          "var(--pagehero-top) var(--section-px) var(--pagehero-bottom)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -27,7 +28,7 @@ export function PageHero({ current, eyebrow, title, lede }: PageHeroProps) {
           {eyebrow}
         </div>
         <h1
-          className="jv-display"
+          className="jv-display jv-section-title"
           style={{
             fontSize: "clamp(44px, 6vw, 84px)",
             margin: 0,
