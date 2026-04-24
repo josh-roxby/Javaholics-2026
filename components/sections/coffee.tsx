@@ -21,15 +21,15 @@ export function SectionCoffee({
       style={{
         background: "var(--bg-2)",
         color: "var(--ink)",
-        padding: "140px 48px",
+        padding: "var(--section-py) var(--section-px)",
         position: "relative",
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         {!hideHeader && (
           <div
+            className="jv-grid-stack"
             style={{
-              display: "grid",
               gridTemplateColumns: "1fr auto",
               alignItems: "end",
               gap: 48,
@@ -44,7 +44,7 @@ export function SectionCoffee({
                 {headerLabel}
               </div>
               <h2
-                className="jv-display"
+                className="jv-display jv-section-title"
                 style={{
                   fontSize: "clamp(44px, 6vw, 84px)",
                   margin: 0,
@@ -94,8 +94,8 @@ export function SectionCoffee({
         )}
 
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "minmax(260px, 320px) 1fr",
             gap: 56,
             alignItems: "start",
@@ -168,8 +168,8 @@ export function SectionCoffee({
 
           <div key={active} style={{ animation: "jv-fadeup 500ms ease-out" }}>
             <div
+              className="jv-grid-stack"
               style={{
-                display: "grid",
                 gridTemplateColumns: "1.2fr 1fr",
                 gap: 48,
                 alignItems: "start",

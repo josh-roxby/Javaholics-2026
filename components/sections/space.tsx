@@ -9,11 +9,17 @@ const STATS = [
 
 export function SectionSpace() {
   return (
-    <section style={{ background: "var(--bg)", color: "var(--ink)", padding: "140px 48px" }}>
+    <section
+      style={{
+        background: "var(--bg)",
+        color: "var(--ink)",
+        padding: "var(--section-py) var(--section-px)",
+      }}
+    >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "1fr auto",
             alignItems: "end",
             gap: 48,
@@ -28,7 +34,7 @@ export function SectionSpace() {
               01 &nbsp;/&nbsp; The Space
             </div>
             <h2
-              className="jv-display"
+              className="jv-display jv-section-title"
               style={{
                 fontSize: "clamp(44px, 6vw, 84px)",
                 margin: 0,
@@ -42,7 +48,7 @@ export function SectionSpace() {
             </h2>
           </div>
           <div
-            className="jv-mono jv-caps"
+            className="jv-mono jv-caps jv-grid-header-meta"
             style={{ opacity: 0.45, whiteSpace: "nowrap" }}
           >
             Fairview Strand, D03
@@ -50,8 +56,8 @@ export function SectionSpace() {
         </div>
 
         <div
+          className="jv-grid-stack"
           style={{
-            display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
             gap: 56,
             alignItems: "start",

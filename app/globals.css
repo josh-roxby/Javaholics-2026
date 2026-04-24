@@ -122,6 +122,24 @@ button { font-family: inherit; }
   }
 }
 
+/* Grids that collapse to a single column on mobile.
+   Pair with inline grid-template-columns for the desktop layout. */
+.jv-grid-stack { display: grid; }
+@media (max-width: 768px) {
+  .jv-grid-stack {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  /* Hide the small right-column meta line in section headers on mobile */
+  .jv-grid-header-meta {
+    display: none !important;
+  }
+  /* Section H2s — give them a phone-sized floor */
+  .jv-section-title {
+    font-size: clamp(32px, 9vw, 56px) !important;
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
