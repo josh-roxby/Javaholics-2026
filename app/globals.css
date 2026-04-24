@@ -177,6 +177,26 @@ button { font-family: inherit; }
     align-items: flex-start !important;
     gap: 10px !important;
   }
+  /* Coffee: swap tab-list layout for a horizontal swipable carousel on mobile */
+  .jv-coffee-desktop {
+    display: none !important;
+  }
+  .jv-coffee-mobile {
+    display: flex !important;
+  }
+}
+
+/* Coffee mobile carousel — hidden on desktop */
+.jv-coffee-mobile {
+  display: none;
+}
+.jv-coffee-mobile-hint {
+  display: none;
+}
+@media (max-width: 768px) {
+  .jv-coffee-mobile-hint {
+    display: block !important;
+  }
 }
 
 .btn {
