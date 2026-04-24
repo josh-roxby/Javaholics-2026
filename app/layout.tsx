@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { MobileNav } from "@/components/mobile-nav";
+import { PlayerProvider } from "@/components/player";
+import { SiteGate } from "@/components/site-gate";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,8 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <MobileNav />
+        <PlayerProvider>
+          {children}
+          <MobileNav />
+        </PlayerProvider>
+        <SiteGate />
       </body>
     </html>
   );
