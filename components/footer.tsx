@@ -7,7 +7,7 @@ export function Footer() {
       style={{
         background: "var(--bg-2)",
         color: "var(--ink-soft)",
-        padding: "56px 48px 32px",
+        padding: "56px var(--section-px) 32px",
         borderTop: "1px solid var(--line)",
       }}
     >
@@ -41,7 +41,7 @@ export function Footer() {
         </div>
         <div style={{ height: 1, background: "var(--line)", margin: "28px 0 20px" }} />
         <div
-          className="jv-mono jv-caps"
+          className="jv-mono jv-caps jv-footer-bottom"
           style={{ display: "flex", justifyContent: "space-between", fontSize: 12, opacity: 0.55 }}
         >
           <span>© 2026 Javaholics, Fairview</span>

@@ -21,7 +21,7 @@ export function Nav({ current = "Home", absolute = true }: NavProps) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "22px 48px",
+        padding: "var(--nav-py) var(--nav-px)",
         position: absolute ? "absolute" : "relative",
         top: 0,
         left: 0,

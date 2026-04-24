@@ -18,6 +18,31 @@
   --crema: #C89B6C;
   --ember: #D87850;
   --navy: #1A2847;
+
+  /* Responsive spacing tokens — shrink on mobile so layouts stop overflowing */
+  --section-py: 140px;
+  --section-px: 48px;
+  --container-px: 48px;
+  --nav-py: 22px;
+  --nav-px: 48px;
+  --hero-top: 140px;
+  --hero-bottom: 24px;
+  --pagehero-top: 160px;
+  --pagehero-bottom: 100px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: 72px;
+    --section-px: 20px;
+    --container-px: 20px;
+    --nav-py: 14px;
+    --nav-px: 20px;
+    --hero-top: 96px;
+    --hero-bottom: 16px;
+    --pagehero-top: 108px;
+    --pagehero-bottom: 64px;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -26,6 +51,8 @@ html, body {
   margin: 0;
   padding: 0;
   background: var(--bg);
+  /* Prevent any child with a pixel-fixed width from pushing the viewport wide on mobile */
+  overflow-x: clip;
 }
 
 body {
@@ -76,6 +103,80 @@ button { font-family: inherit; }
   gap: 3rem;
   animation: jv-marquee 60s linear infinite;
   white-space: nowrap;
+}
+
+/* Hero headline: stays single-line on desktop per the design; wraps on mobile */
+.jv-hero-title {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .jv-hero-title {
+    white-space: normal;
+  }
+  .jv-hero-title br {
+    display: none;
+  }
+}
+
+/* Landing marquee scales down on mobile */
+@media (max-width: 768px) {
+  .jv-marquee {
+    font-size: 18px !important;
+    gap: 1.5rem;
+  }
+}
+
+/* Grids that collapse to a single column on mobile.
+   Pair with inline grid-template-columns for the desktop layout. */
+.jv-grid-stack { display: grid; }
+@media (max-width: 768px) {
+  .jv-grid-stack {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  /* Hide the small right-column meta line in section headers on mobile */
+  .jv-grid-header-meta {
+    display: none !important;
+  }
+  /* Section H2s — give them a phone-sized floor */
+  .jv-section-title {
+    font-size: clamp(32px, 9vw, 56px) !important;
+  }
+  /* People carousel — smaller cards, hide arrow buttons (swipe handles it) */
+  .jv-people-card {
+    flex-basis: 240px !important;
+    height: 340px !important;
+  }
+  .jv-people-arrows {
+    display: none !important;
+  }
+  /* Community marquee — smaller quote cards + thinner edge fades */
+  .jv-quote-card {
+    width: 240px !important;
+    height: 160px !important;
+  }
+  .jv-edge-fade {
+    width: 40px !important;
+  }
+  /* Stories (/people): portrait first on mobile, tighter row gap, capped portrait width */
+  .jv-stories-list {
+    gap: 72px !important;
+  }
+  .jv-story-row .jv-story-portrait {
+    order: 0;
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .jv-story-row .jv-story-body {
+    order: 1;
+  }
+  /* Footer: stack the bottom copyright row on mobile */
+  .jv-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
 }
 
 .btn {
@@ -169,10 +270,6 @@ button { font-family: inherit; }
   .jv-nav-links,
   .jv-nav-hours {
     display: none !important;
-  }
-  /* Tighten top nav padding on mobile so logo sits clean */
-  .jv-nav {
-    padding: 18px 20px !important;
   }
   /* Clearance so the pill doesn't cover footer copy */
   .jv-footer {

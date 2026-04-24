@@ -25,14 +25,9 @@ people, and the community around it.
 - [x] `/visit` — single-viewport layout (title + address/hours/getting-here + map).
 - [x] `/people` story-led redesign: four featured Fairview locals with portraits + pull quotes + 2-paragraph stories, leading the staff carousel and community marquee.
 - [x] Mobile bottom pill nav: fixed floating pill, circular icon+label buttons for each page, ember-filled active state, safe-area-aware.
+- [x] Mobile responsive pass: `overflow-x: clip` safety net, responsive spacing CSS vars, utility classes (`.jv-grid-stack`, `.jv-section-title`, `.jv-grid-header-meta`). All landing sections (Hero, Marquee, Space, Coffee, People carousel, Community marquee), Stories section, PageHero, Footer, `/visit`, and `/store` collapse cleanly on phones.
 
 ## TODO
-
-Mobile pass (the big remaining piece):
-
-- [ ] Landing sections responsive: hero stack, marquee, Space / Coffee / People / Community grids collapse to single column.
-- [ ] Interactive sections mobile-tuned: coffee tabs (stack or horizontal scroll), people carousel (touch-tuned), community marquee (narrower cards).
-- [ ] Subpages responsive: page-hero padding, `/visit` map stacks above info, `/coffee` subpage, `/people` stories single-column, `/store` centering holds on small screens.
 
 Follow-ups after mobile:
 
