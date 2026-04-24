@@ -279,14 +279,14 @@ button { font-family: inherit; }
   animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
 }
 
-/* Pulse the mobile music circle only when the player is open.
-   Don't pulse normal nav items that happen to be on the active page. */
-.jv-mnav-item.jv-mnav-music.active .jv-mnav-circle {
-  animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
-}
 @media (max-width: 768px) {
-  /* Mobile uses the pill nav music button instead */
-  .jv-player-fab { display: none; }
+  /* Mobile FAB sits at bottom-left, matching the pill nav's safe-area offset */
+  .jv-player-fab {
+    left: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .jv-player-backdrop {
@@ -391,13 +391,13 @@ button { font-family: inherit; }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
 .btn-ghost:hover { border-color: var(--ink); }
 
-/* Mobile pill nav — hidden on desktop, floats bottom on mobile */
+/* Mobile pill nav — slim text-only pill, hidden on desktop */
 .jv-mnav { display: none; }
 
 .jv-mnav-pill {
   display: flex;
   gap: 2px;
-  padding: 6px;
+  padding: 4px;
   background: rgba(10, 18, 32, 0.82);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
@@ -407,52 +407,26 @@ button { font-family: inherit; }
 }
 
 .jv-mnav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 4px;
-  color: var(--ink-mute);
-  text-decoration: none;
-  border-radius: 999px;
-  min-width: 50px;
-  background: transparent;
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.jv-mnav-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  background: transparent;
-  border: 1px solid var(--line-strong);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink-soft);
-  transition: all 180ms;
-}
-
-.jv-mnav-label {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  text-transform: uppercase;
-  font-size: 9px;
-  letter-spacing: 0.08em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-size: 12px;
   font-weight: 500;
-  opacity: 0.75;
-  line-height: 1;
+  color: var(--ink-soft);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 180ms;
+  white-space: nowrap;
 }
 
-.jv-mnav-item.active .jv-mnav-circle {
+.jv-mnav-item.active {
   background: var(--ember);
-  border-color: var(--ember);
   color: var(--bg);
-}
-.jv-mnav-item.active .jv-mnav-label {
-  color: var(--ink);
-  opacity: 1;
 }
 
 @media (max-width: 768px) {

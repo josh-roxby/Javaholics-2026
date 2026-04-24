@@ -48,14 +48,14 @@ function RoastDetail({
         className="jv-grid-stack"
         style={{
           gridTemplateColumns: "1.2fr 1fr",
-          gap: 48,
+          gap: 36,
           alignItems: "start",
         }}
       >
         <div>
-          <div style={{ color: "var(--roast)", marginBottom: 24 }}>
+          <div style={{ color: "var(--roast)", marginBottom: 16 }}>
             <Bean
-              size={88}
+              size={60}
               variant={index % 5}
               color="var(--crema)"
               fill="var(--roast)"
@@ -66,22 +66,25 @@ function RoastDetail({
             style={{
               fontFamily: '"Fraunces", serif',
               fontStyle: "italic",
-              fontSize: 22,
+              fontSize: 19,
               lineHeight: 1.35,
               color: "var(--ink)",
-              marginBottom: 28,
+              marginBottom: 18,
               fontWeight: 400,
               maxWidth: 380,
             }}
           >
             &ldquo;{roast.tagline}&rdquo;
           </div>
-          <WobblyRule variant={index % 3} style={{ marginTop: 8, marginBottom: 20 }} />
+          <WobblyRule variant={index % 3} style={{ marginBottom: 14 }} />
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: 16,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "8px 18px",
+              fontSize: 12,
+              color: "var(--ink-soft)",
+              lineHeight: 1.4,
             }}
           >
             {(
@@ -91,29 +94,32 @@ function RoastDetail({
                 ["Elevation", roast.elevation],
               ] as const
             ).map(([k, v], i) => (
-              <div key={i}>
-                <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 6 }}>
+              <span key={i}>
+                <span
+                  className="jv-mono jv-caps"
+                  style={{ opacity: 0.55, marginRight: 6 }}
+                >
                   {k}
-                </div>
-                <div style={{ fontSize: 13 }}>{v}</div>
-              </div>
+                </span>
+                {v}
+              </span>
             ))}
           </div>
         </div>
 
         <div>
-          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 14 }}>
+          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 10 }}>
             Tasting notes
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
             {roast.notes.map((n, i) => (
               <span
                 key={i}
                 style={{
-                  padding: "6px 14px",
+                  padding: "4px 12px",
                   borderRadius: 100,
                   border: "1px solid var(--line-strong)",
-                  fontSize: 13,
+                  fontSize: 12,
                   color: "var(--ink)",
                 }}
               >
@@ -122,7 +128,7 @@ function RoastDetail({
             ))}
           </div>
 
-          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 16 }}>
+          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 12 }}>
             Profile
           </div>
           {(
@@ -132,13 +138,13 @@ function RoastDetail({
               ["Sweetness", roast.sweetness],
             ] as const
           ).map(([label, val], i) => (
-            <div key={i} style={{ marginBottom: 12 }}>
+            <div key={i} style={{ marginBottom: 8 }}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  fontSize: 13,
-                  marginBottom: 6,
+                  fontSize: 12,
+                  marginBottom: 4,
                 }}
               >
                 <span>{label}</span>
@@ -169,7 +175,7 @@ function RoastDetail({
             </div>
           ))}
 
-          <button className="btn btn-primary" style={{ marginTop: 24 }}>
+          <button className="btn btn-primary" style={{ marginTop: 18 }}>
             Shop 250g bag, €14
           </button>
         </div>
@@ -388,7 +394,7 @@ export function SectionCoffee({
                 scrollSnapStop: "always",
                 background: "var(--bg-3)",
                 border: "1px solid var(--line)",
-                padding: "26px 22px",
+                padding: "20px 18px",
               }}
             >
               <RoastDetail roast={roast} index={i} withHeader />
