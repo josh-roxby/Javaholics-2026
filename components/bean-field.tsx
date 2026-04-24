@@ -57,20 +57,43 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
     window.addEventListener("resize", resize);
 
     const beans: Bean[] = [];
-    const n = Math.min(count, Math.floor((state.w * state.h) / 2900));
-    for (let i = 0; i < n; i++) {
-      beans.push({
-        x: Math.random() * state.w,
-        y: state.h * 0.5 + Math.random() * state.h * 0.5,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: 0,
-        r: 12 + Math.random() * 6,
-        rot: Math.random() * Math.PI * 2,
-        vr: (Math.random() - 0.5) * 0.02,
-        shade: Math.random(),
-        variant: Math.floor(Math.random() * 3),
-      });
-    }
+    let draining = false;
+    let drainTimer: ReturnType<typeof setTimeout> | null = null;
+    let intersecting = false;
+    let ready = (() => {
+      try {
+        return typeof window !== "undefined" && !!sessionStorage.getItem("jv-entered");
+      } catch {
+        return true;
+      }
+    })();
+
+    const spawnBeans = () => {
+      beans.length = 0;
+      const n = Math.min(count, Math.floor((state.w * state.h) / 2900));
+      for (let i = 0; i < n; i++) {
+        beans.push({
+          x: Math.random() * state.w,
+          y: -Math.random() * state.h * 0.9 - 10,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: Math.random() * 0.4,
+          r: 12 + Math.random() * 6,
+          rot: Math.random() * Math.PI * 2,
+          vr: (Math.random() - 0.5) * 0.02,
+          shade: Math.random(),
+          variant: Math.floor(Math.random() * 3),
+        });
+      }
+    };
+
+    const repositionAbove = () => {
+      for (const b of beans) {
+        b.x = Math.random() * state.w;
+        b.y = -Math.random() * state.h * 0.9 - 10;
+        b.vx = (Math.random() - 0.5) * 0.3;
+        b.vy = Math.random() * 0.4;
+      }
+    };
 
     const onMove = (e: MouseEvent) => {
       const r = wrap.getBoundingClientRect();
@@ -187,35 +210,38 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
 
         if (b.x < b.r) { b.x = b.r; b.vx *= -0.4; }
         if (b.x > w - b.r) { b.x = w - b.r; b.vx *= -0.4; }
-        if (b.y > h - b.r) { b.y = h - b.r; b.vy *= -0.35; b.vx *= 0.9; }
-        if (b.y < b.r) { b.y = b.r; b.vy *= -0.4; }
+        // Bottom wall only when NOT draining — draining lets beans fall off
+        if (!draining && b.y > h - b.r) { b.y = h - b.r; b.vy *= -0.35; b.vx *= 0.9; }
       }
 
-      for (let iter = 0; iter < COLLIDE_ITER; iter++) {
-        for (let i = 0; i < beans.length; i++) {
-          const a = beans[i];
-          for (let j = i + 1; j < beans.length; j++) {
-            const c = beans[j];
-            const dx = c.x - a.x;
-            const dy = c.y - a.y;
-            const rs = a.r + c.r;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < rs * rs && d2 > 0.0001) {
-              const d = Math.sqrt(d2);
-              const overlap = (rs - d) * 0.5;
-              const nx = dx / d;
-              const ny = dy / d;
-              a.x -= nx * overlap;
-              a.y -= ny * overlap;
-              c.x += nx * overlap;
-              c.y += ny * overlap;
-              const relV = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
-              if (relV < 0) {
-                const imp = relV * 0.5;
-                a.vx += nx * imp;
-                a.vy += ny * imp;
-                c.vx -= nx * imp;
-                c.vy -= ny * imp;
+      // Skip bean-bean collisions while draining so they fall through cleanly
+      if (!draining) {
+        for (let iter = 0; iter < COLLIDE_ITER; iter++) {
+          for (let i = 0; i < beans.length; i++) {
+            const a = beans[i];
+            for (let j = i + 1; j < beans.length; j++) {
+              const c = beans[j];
+              const dx = c.x - a.x;
+              const dy = c.y - a.y;
+              const rs = a.r + c.r;
+              const d2 = dx * dx + dy * dy;
+              if (d2 < rs * rs && d2 > 0.0001) {
+                const d = Math.sqrt(d2);
+                const overlap = (rs - d) * 0.5;
+                const nx = dx / d;
+                const ny = dy / d;
+                a.x -= nx * overlap;
+                a.y -= ny * overlap;
+                c.x += nx * overlap;
+                c.y += ny * overlap;
+                const relV = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+                if (relV < 0) {
+                  const imp = relV * 0.5;
+                  a.vx += nx * imp;
+                  a.vy += ny * imp;
+                  c.vx -= nx * imp;
+                  c.vy -= ny * imp;
+                }
               }
             }
           }
@@ -224,7 +250,7 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
     };
 
     let raf = 0;
-    let running = true;
+    let running = false;
 
     const loop = () => {
       if (!running) return;
@@ -244,26 +270,56 @@ export function BeanField({ height = 360, count = 180 }: BeanFieldProps) {
       cancelAnimationFrame(raf);
     };
 
+    const pourIntoView = () => {
+      if (drainTimer) {
+        clearTimeout(drainTimer);
+        drainTimer = null;
+      }
+      draining = false;
+      if (beans.length === 0) spawnBeans();
+      else repositionAbove();
+      start();
+    };
+
+    const beginDrain = () => {
+      if (beans.length === 0 || !running) return;
+      draining = true;
+      if (drainTimer) clearTimeout(drainTimer);
+      drainTimer = setTimeout(() => {
+        if (!intersecting) stop();
+      }, 2500);
+    };
+
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) start();
-        else stop();
+        intersecting = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          if (ready) pourIntoView();
+        } else {
+          beginDrain();
+        }
       },
       { threshold: 0 },
     );
     io.observe(wrap);
 
+    const onEnter = () => {
+      ready = true;
+      if (intersecting) pourIntoView();
+    };
+    window.addEventListener("jv:enter", onEnter);
+
     const onVis = () => {
       if (document.hidden) stop();
-      else start();
+      else if (intersecting && ready) start();
     };
     document.addEventListener("visibilitychange", onVis);
 
-    loop();
-
     return () => {
       stop();
+      if (drainTimer) clearTimeout(drainTimer);
       io.disconnect();
+      window.removeEventListener("jv:enter", onEnter);
       document.removeEventListener("visibilitychange", onVis);
       ro.disconnect();
       window.removeEventListener("resize", resize);

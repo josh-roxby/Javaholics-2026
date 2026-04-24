@@ -63,6 +63,6 @@ export const ROASTS: Roast[] = [
     body: 3,
     acidity: 3,
     sweetness: 4,
-    tagline: "Ours. Named after the dog.",
+    tagline: "Ours. The one we keep going back to.",
   },
 ];

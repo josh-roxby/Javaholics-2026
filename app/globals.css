@@ -98,6 +98,17 @@ button { font-family: inherit; }
   to   { transform: translateX(0); }
 }
 
+@keyframes jv-gate-bean {
+  from { transform: rotate(-3deg); }
+  to   { transform: rotate(3deg); }
+}
+
+@keyframes jv-music-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(216, 120, 80, 0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(216, 120, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(216, 120, 80, 0); }
+}
+
 .jv-marquee {
   display: inline-flex;
   gap: 3rem;
@@ -177,6 +188,165 @@ button { font-family: inherit; }
     align-items: flex-start !important;
     gap: 10px !important;
   }
+  /* Coffee: swap tab-list layout for a horizontal swipable carousel on mobile */
+  .jv-coffee-desktop {
+    display: none !important;
+  }
+  .jv-coffee-mobile {
+    display: flex !important;
+  }
+}
+
+/* Coffee mobile carousel — hidden on desktop */
+.jv-coffee-mobile {
+  display: none;
+}
+.jv-coffee-mobile-hint {
+  display: none;
+}
+@media (max-width: 768px) {
+  .jv-coffee-mobile-hint {
+    display: block !important;
+  }
+}
+
+/* Stories (/people): portraits stick while the body scrolls past.
+   Only on desktop — mobile already stacks and rotation/sticky would fight it. */
+@media (min-width: 769px) {
+  .jv-story-row {
+    min-height: 88vh;
+  }
+  .jv-story-portrait {
+    position: sticky;
+    top: 12vh;
+    align-self: start;
+  }
+}
+
+/* House playlist — floating FAB + modal */
+.jv-player-fab {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(10, 18, 32, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 200ms;
+  z-index: 55;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.jv-player-fab:hover {
+  color: var(--ember);
+  border-color: var(--ember);
+}
+.jv-player-fab.active {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: var(--bg);
+  animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
+}
+
+/* Pulse the mobile music circle only when the player is open.
+   Don't pulse normal nav items that happen to be on the active page. */
+.jv-mnav-item.jv-mnav-music.active .jv-mnav-circle {
+  animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
+}
+@media (max-width: 768px) {
+  /* Mobile uses the pill nav music button instead */
+  .jv-player-fab { display: none; }
+}
+
+.jv-player-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 18, 32, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+  z-index: 58;
+}
+.jv-player-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.jv-player-modal {
+  position: fixed;
+  left: 20px;
+  bottom: 86px;
+  width: 340px;
+  max-width: calc(100vw - 40px);
+  background: rgba(14, 24, 48, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  z-index: 60;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 220ms, transform 220ms cubic-bezier(.2,.7,.3,1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+.jv-player-modal.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (max-width: 768px) {
+  .jv-player-modal {
+    left: 50%;
+    right: auto;
+    bottom: max(96px, calc(env(safe-area-inset-bottom) + 86px));
+    transform: translate(-50%, 10px);
+    width: calc(100vw - 28px);
+    max-width: 380px;
+  }
+  .jv-player-modal.open {
+    transform: translate(-50%, 0);
+  }
+}
+
+.jv-player-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.jv-player-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.jv-player-close:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.jv-player-frame-wrap {
+  min-height: 152px;
 }
 
 .btn {
@@ -217,11 +387,15 @@ button { font-family: inherit; }
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 4px 6px;
+  padding: 4px 4px;
   color: var(--ink-mute);
   text-decoration: none;
   border-radius: 999px;
-  min-width: 56px;
+  min-width: 50px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .jv-mnav-circle {

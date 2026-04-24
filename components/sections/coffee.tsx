@@ -2,19 +2,188 @@
 
 import { useState } from "react";
 import { Bean } from "../bean";
-import { ROASTS } from "@/lib/roasts";
+import { WobblyRule } from "../wobbly-rule";
+import { ROASTS, type Roast } from "@/lib/roasts";
 
 type SectionCoffeeProps = {
   hideHeader?: boolean;
   headerLabel?: string;
 };
 
+function RoastDetail({
+  roast,
+  index,
+  withHeader = false,
+}: {
+  roast: Roast;
+  index: number;
+  withHeader?: boolean;
+}) {
+  return (
+    <>
+      {withHeader && (
+        <div
+          style={{
+            marginBottom: 24,
+            paddingBottom: 16,
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+            <span className="jv-mono jv-caps" style={{ opacity: 0.6 }}>
+              0{index + 1}
+            </span>
+            <span
+              className="jv-display"
+              style={{ fontSize: 28, fontStyle: "italic", fontWeight: 400 }}
+            >
+              {roast.name}
+            </span>
+          </div>
+          <div style={{ fontSize: 13, opacity: 0.6, marginTop: 6 }}>{roast.origin}</div>
+        </div>
+      )}
+
+      <div
+        className="jv-grid-stack"
+        style={{
+          gridTemplateColumns: "1.2fr 1fr",
+          gap: 48,
+          alignItems: "start",
+        }}
+      >
+        <div>
+          <div style={{ color: "var(--roast)", marginBottom: 24 }}>
+            <Bean
+              size={88}
+              variant={index % 5}
+              color="var(--crema)"
+              fill="var(--roast)"
+              strokeWidth={1.2}
+            />
+          </div>
+          <div
+            style={{
+              fontFamily: '"Fraunces", serif',
+              fontStyle: "italic",
+              fontSize: 22,
+              lineHeight: 1.35,
+              color: "var(--ink)",
+              marginBottom: 28,
+              fontWeight: 400,
+              maxWidth: 380,
+            }}
+          >
+            &ldquo;{roast.tagline}&rdquo;
+          </div>
+          <WobblyRule variant={index % 3} style={{ marginTop: 8, marginBottom: 20 }} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: 16,
+            }}
+          >
+            {(
+              [
+                ["Roast", roast.roast],
+                ["Process", roast.process],
+                ["Elevation", roast.elevation],
+              ] as const
+            ).map(([k, v], i) => (
+              <div key={i}>
+                <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 6 }}>
+                  {k}
+                </div>
+                <div style={{ fontSize: 13 }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 14 }}>
+            Tasting notes
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
+            {roast.notes.map((n, i) => (
+              <span
+                key={i}
+                style={{
+                  padding: "6px 14px",
+                  borderRadius: 100,
+                  border: "1px solid var(--line-strong)",
+                  fontSize: 13,
+                  color: "var(--ink)",
+                }}
+              >
+                {n}
+              </span>
+            ))}
+          </div>
+
+          <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 16 }}>
+            Profile
+          </div>
+          {(
+            [
+              ["Body", roast.body],
+              ["Acidity", roast.acidity],
+              ["Sweetness", roast.sweetness],
+            ] as const
+          ).map(([label, val], i) => (
+            <div key={i} style={{ marginBottom: 12 }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 13,
+                  marginBottom: 6,
+                }}
+              >
+                <span>{label}</span>
+                <span className="jv-mono" style={{ opacity: 0.55 }}>
+                  {val}/5
+                </span>
+              </div>
+              <div
+                style={{
+                  height: 2,
+                  background: "var(--line)",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    height: "100%",
+                    width: `${(val / 5) * 100}%`,
+                    background: "var(--crema)",
+                    transition: "width 600ms cubic-bezier(.2,.7,.3,1)",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+
+          <button className="btn btn-primary" style={{ marginTop: 24 }}>
+            Shop 250g bag, €14
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 export function SectionCoffee({
   hideHeader = false,
-  headerLabel = "02  /  The Coffee",
+  headerLabel = "02  /  The Coffee",
 }: SectionCoffeeProps) {
   const [active, setActive] = useState(0);
-  const r = ROASTS[active];
+  const activeRoast = ROASTS[active];
 
   return (
     <section
@@ -56,17 +225,42 @@ export function SectionCoffee({
                 <span style={{ fontStyle: "italic", color: "var(--crema)" }}>one room.</span>
               </h2>
             </div>
-            <div
+            <aside
               style={{
                 maxWidth: 320,
-                fontSize: 15,
-                lineHeight: 1.55,
-                color: "var(--ink-soft)",
+                padding: "22px 24px",
+                background: "rgba(232, 223, 201, 0.04)",
+                border: "1px solid var(--line)",
+                transform: "rotate(-1deg)",
+                position: "relative",
               }}
             >
-              A rotating bar of single origins, plus our own house blend. Grab a bag on the way
-              out, or sit with one.
-            </div>
+              <div
+                className="jv-mono jv-caps"
+                style={{ opacity: 0.6, color: "var(--crema)", marginBottom: 12 }}
+              >
+                Dara&apos;s pick, this week
+              </div>
+              <div
+                style={{
+                  fontFamily: '"Fraunces", serif',
+                  fontStyle: "italic",
+                  fontSize: 19,
+                  lineHeight: 1.4,
+                  color: "var(--ink)",
+                  fontWeight: 400,
+                }}
+              >
+                &ldquo;The Kochere on a V60. First sip wakes you up. The second one tells you a
+                story.&rdquo;
+              </div>
+              <div
+                className="jv-mono jv-caps"
+                style={{ opacity: 0.55, marginTop: 14 }}
+              >
+                &mdash; D.
+              </div>
+            </aside>
           </div>
         )}
 
@@ -93,9 +287,11 @@ export function SectionCoffee({
           </div>
         )}
 
+        {/* Desktop: vertical tab list + detail panel */}
         <div
-          className="jv-grid-stack"
+          className="jv-coffee-desktop"
           style={{
+            display: "grid",
             gridTemplateColumns: "minmax(260px, 320px) 1fr",
             gap: 56,
             alignItems: "start",
@@ -167,141 +363,48 @@ export function SectionCoffee({
           </div>
 
           <div key={active} style={{ animation: "jv-fadeup 500ms ease-out" }}>
-            <div
-              className="jv-grid-stack"
+            <RoastDetail roast={activeRoast} index={active} />
+          </div>
+        </div>
+
+        {/* Mobile: swipable carousel of full roast cards */}
+        <div
+          className="jv-coffee-mobile jv-hide-scrollbar"
+          style={{
+            gap: 14,
+            overflowX: "auto",
+            scrollSnapType: "x mandatory",
+            padding: "8px var(--section-px) 8px",
+            margin: "0 calc(-1 * var(--section-px))",
+          }}
+        >
+          {ROASTS.map((roast, i) => (
+            <article
+              key={roast.id}
               style={{
-                gridTemplateColumns: "1.2fr 1fr",
-                gap: 48,
-                alignItems: "start",
+                flex: "0 0 calc(100vw - 56px)",
+                maxWidth: 360,
+                scrollSnapAlign: "center",
+                scrollSnapStop: "always",
+                background: "var(--bg-3)",
+                border: "1px solid var(--line)",
+                padding: "26px 22px",
               }}
             >
-              <div>
-                <div style={{ color: "var(--roast)", marginBottom: 24 }}>
-                  <Bean
-                    size={88}
-                    variant={active % 5}
-                    color="var(--crema)"
-                    fill="var(--roast)"
-                    strokeWidth={1.2}
-                  />
-                </div>
-                <div
-                  style={{
-                    fontFamily: '"Fraunces", serif',
-                    fontStyle: "italic",
-                    fontSize: 24,
-                    lineHeight: 1.35,
-                    color: "var(--ink)",
-                    marginBottom: 32,
-                    fontWeight: 400,
-                    maxWidth: 380,
-                  }}
-                >
-                  &ldquo;{r.tagline}&rdquo;
-                </div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr",
-                    gap: 20,
-                    paddingTop: 24,
-                    borderTop: "1px solid var(--line)",
-                  }}
-                >
-                  {(
-                    [
-                      ["Roast", r.roast],
-                      ["Process", r.process],
-                      ["Elevation", r.elevation],
-                    ] as const
-                  ).map(([k, v], i) => (
-                    <div key={i}>
-                      <div
-                        className="jv-mono jv-caps"
-                        style={{ opacity: 0.55, marginBottom: 6 }}
-                      >
-                        {k}
-                      </div>
-                      <div style={{ fontSize: 14 }}>{v}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <RoastDetail roast={roast} index={i} withHeader />
+            </article>
+          ))}
+        </div>
 
-              <div>
-                <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 14 }}>
-                  Tasting notes
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 32 }}>
-                  {r.notes.map((n, i) => (
-                    <span
-                      key={i}
-                      style={{
-                        padding: "6px 14px",
-                        borderRadius: 100,
-                        border: "1px solid var(--line-strong)",
-                        fontSize: 13,
-                        color: "var(--ink)",
-                      }}
-                    >
-                      {n}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="jv-mono jv-caps" style={{ opacity: 0.55, marginBottom: 16 }}>
-                  Profile
-                </div>
-                {(
-                  [
-                    ["Body", r.body],
-                    ["Acidity", r.acidity],
-                    ["Sweetness", r.sweetness],
-                  ] as const
-                ).map(([label, val], i) => (
-                  <div key={i} style={{ marginBottom: 12 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        fontSize: 13,
-                        marginBottom: 6,
-                      }}
-                    >
-                      <span>{label}</span>
-                      <span className="jv-mono" style={{ opacity: 0.55 }}>
-                        {val}/5
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        height: 2,
-                        background: "var(--line)",
-                        position: "relative",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: 0,
-                          top: 0,
-                          height: "100%",
-                          width: `${(val / 5) * 100}%`,
-                          background: "var(--crema)",
-                          transition: "width 600ms cubic-bezier(.2,.7,.3,1)",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-
-                <button className="btn btn-primary" style={{ marginTop: 28 }}>
-                  Shop 250g bag, €14
-                </button>
-              </div>
-            </div>
-          </div>
+        <div
+          className="jv-coffee-mobile-hint jv-mono jv-caps"
+          style={{
+            marginTop: 18,
+            textAlign: "center",
+            color: "var(--ink-mute)",
+          }}
+        >
+          swipe for more roasts
         </div>
       </div>
     </section>

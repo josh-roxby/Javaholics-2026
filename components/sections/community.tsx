@@ -11,7 +11,7 @@ const QUOTES: Quote[] = [
   { name: "Conor", note: "Finish the park run, come here, the music is always right." },
   { name: "Hannah", note: "First cafe that made me feel like I live in Dublin." },
   { name: "Mark", note: "The house blend and a window seat is a full hour of peace." },
-  { name: "Ellie", note: "Dara knows my dog's name before he knows mine and I love it." },
+  { name: "Ellie", note: "Dara remembered my order on day two. Been coming ever since." },
   { name: "Rory", note: "The Kochere on a filter, window seat, rain outside. Sorted." },
   { name: "Aine", note: "Honestly the best playlist in Dublin. I shazam half of it." },
   { name: "Tom", note: "Met my partner in the queue. Still come in every Sunday." },

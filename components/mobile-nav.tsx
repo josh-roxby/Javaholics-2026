@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { usePlayer } from "./player";
 
 type IconProps = { size?: number };
 
@@ -102,6 +103,26 @@ function PinIcon({ size = 18 }: IconProps) {
   );
 }
 
+function MusicIcon({ size = 18 }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </svg>
+  );
+}
+
 const ITEMS = [
   { href: "/", label: "Home", Icon: HomeIcon },
   { href: "/coffee", label: "Coffee", Icon: CoffeeIcon },
@@ -112,6 +133,7 @@ const ITEMS = [
 
 export function MobileNav() {
   const pathname = usePathname();
+  const { open, toggle } = usePlayer();
   return (
     <nav className="jv-mnav" aria-label="Primary">
       <div className="jv-mnav-pill">
@@ -131,6 +153,18 @@ export function MobileNav() {
             </Link>
           );
         })}
+        <button
+          type="button"
+          onClick={toggle}
+          className={`jv-mnav-item jv-mnav-music${open ? " active" : ""}`}
+          aria-label="House playlist"
+          aria-expanded={open}
+        >
+          <span className="jv-mnav-circle">
+            <MusicIcon />
+          </span>
+          <span className="jv-mnav-label">Music</span>
+        </button>
       </div>
     </nav>
   );

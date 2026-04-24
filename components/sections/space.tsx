@@ -1,4 +1,5 @@
 import { Bean } from "../bean";
+import { WobblyRule } from "../wobbly-rule";
 
 const STATS = [
   { n: "2019", l: "Opened" },
@@ -51,7 +52,7 @@ export function SectionSpace() {
             className="jv-mono jv-caps jv-grid-header-meta"
             style={{ opacity: 0.45, whiteSpace: "nowrap" }}
           >
-            Fairview Strand, D03
+            Merville Ave, D03
           </div>
         </div>
 
@@ -101,7 +102,7 @@ export function SectionSpace() {
               className="jv-mono jv-caps"
               style={{ position: "absolute", bottom: 16, left: 16, right: 16, opacity: 0.45 }}
             >
-              A morning, Fairview Strand
+              A morning, Merville Ave
             </div>
             <div
               style={{
@@ -133,13 +134,12 @@ export function SectionSpace() {
               &ldquo;A good cafe is a small social engine. It makes the street around it work a
               little better.&rdquo;
             </div>
+            <WobblyRule variant={0} style={{ marginBottom: 32 }} />
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: 24,
-                paddingTop: 32,
-                borderTop: "1px solid var(--line)",
               }}
             >
               {STATS.map((s, i) => (
