@@ -156,7 +156,7 @@ export function MobileNav() {
         <button
           type="button"
           onClick={toggle}
-          className={`jv-mnav-item${open ? " active" : ""}`}
+          className={`jv-mnav-item jv-mnav-music${open ? " active" : ""}`}
           aria-label="House playlist"
           aria-expanded={open}
         >

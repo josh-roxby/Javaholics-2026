@@ -103,6 +103,12 @@ button { font-family: inherit; }
   to   { transform: rotate(3deg); }
 }
 
+@keyframes jv-music-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(216, 120, 80, 0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(216, 120, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(216, 120, 80, 0); }
+}
+
 .jv-marquee {
   display: inline-flex;
   gap: 3rem;
@@ -246,6 +252,13 @@ button { font-family: inherit; }
   background: var(--ember);
   border-color: var(--ember);
   color: var(--bg);
+  animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
+}
+
+/* Pulse the mobile music circle only when the player is open.
+   Don't pulse normal nav items that happen to be on the active page. */
+.jv-mnav-item.jv-mnav-music.active .jv-mnav-circle {
+  animation: jv-music-pulse 1.8s cubic-bezier(.4, 0, .6, 1) infinite;
 }
 @media (max-width: 768px) {
   /* Mobile uses the pill nav music button instead */

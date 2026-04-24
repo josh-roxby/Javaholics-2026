@@ -9,7 +9,6 @@ const PEOPLE = [
   { name: "Tomás", role: "Roaster", bean: 2 },
   { name: "Aoife", role: "Barista, baker", bean: 3 },
   { name: "Marcus", role: "Weekend barista", bean: 4 },
-  { name: "Lola", role: "Shop dog", bean: 1 },
 ];
 
 const carouselBtn: React.CSSProperties = {
@@ -86,7 +85,7 @@ export function SectionPeople({ eyebrow = "03  /  The People" }: SectionPeoplePr
           <div
             style={{ maxWidth: 280, fontSize: 15, lineHeight: 1.55, color: "var(--ink-soft)" }}
           >
-            Six humans and a dog. Most of us live around here.
+            Five of us behind the bar. Most of us live around here.
           </div>
           <div className="jv-people-arrows" style={{ display: "flex", gap: 10 }}>
             <button onClick={() => scrollBy(-1)} aria-label="Previous" style={carouselBtn}>
