@@ -1,4 +1,5 @@
 import { Bean } from "../bean";
+import { WobblyRule } from "../wobbly-rule";
 
 const STATS = [
   { n: "2019", l: "Opened" },
@@ -133,13 +134,12 @@ export function SectionSpace() {
               &ldquo;A good cafe is a small social engine. It makes the street around it work a
               little better.&rdquo;
             </div>
+            <WobblyRule variant={0} style={{ marginBottom: 32 }} />
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: 24,
-                paddingTop: 32,
-                borderTop: "1px solid var(--line)",
               }}
             >
               {STATS.map((s, i) => (

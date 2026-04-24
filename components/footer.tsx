@@ -1,4 +1,5 @@
 import { Bean } from "./bean";
+import { WobblyRule } from "./wobbly-rule";
 
 export function Footer() {
   return (
@@ -39,7 +40,7 @@ export function Footer() {
             <a style={{ cursor: "pointer" }}>Contact</a>
           </div>
         </div>
-        <div style={{ height: 1, background: "var(--line)", margin: "28px 0 20px" }} />
+        <WobblyRule variant={1} style={{ margin: "28px 0 20px" }} />
         <div
           className="jv-mono jv-caps jv-footer-bottom"
           style={{ display: "flex", justifyContent: "space-between", fontSize: 12, opacity: 0.55 }}

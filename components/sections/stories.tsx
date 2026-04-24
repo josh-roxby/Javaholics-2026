@@ -1,4 +1,5 @@
 import { Bean } from "../bean";
+import { WobblyRule } from "../wobbly-rule";
 import { LOCAL_STORIES, type LocalStory } from "@/lib/stories";
 
 const PORTRAIT_TILT = [-1.6, 1, -0.7, 1.3];
@@ -126,11 +127,9 @@ function StoryBody({ story, index }: { story: LocalStory; index: number }) {
         ))}
       </div>
 
+      <WobblyRule variant={index % 3} style={{ marginTop: 28, marginBottom: 20 }} />
       <div
         style={{
-          marginTop: 28,
-          paddingTop: 20,
-          borderTop: "1px solid var(--line)",
           display: "flex",
           gap: 32,
         }}
