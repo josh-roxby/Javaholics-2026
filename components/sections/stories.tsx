@@ -1,7 +1,10 @@
 import { Bean } from "../bean";
 import { LOCAL_STORIES, type LocalStory } from "@/lib/stories";
 
+const PORTRAIT_TILT = [-1.6, 1, -0.7, 1.3];
+
 function StoryPortrait({ story, index }: { story: LocalStory; index: number }) {
+  const tilt = PORTRAIT_TILT[index % PORTRAIT_TILT.length];
   return (
     <div
       className="jv-story-portrait"
@@ -11,6 +14,8 @@ function StoryPortrait({ story, index }: { story: LocalStory; index: number }) {
         position: "relative",
         border: "1px solid var(--line)",
         overflow: "hidden",
+        transform: `rotate(${tilt}deg)`,
+        boxShadow: "0 18px 40px rgba(0, 0, 0, 0.35)",
       }}
     >
       <div
@@ -204,7 +209,7 @@ export function SectionStories() {
                 style={{
                   gridTemplateColumns: "minmax(280px, 440px) 1fr",
                   gap: 72,
-                  alignItems: "center",
+                  alignItems: "start",
                 }}
               >
                 {portraitFirst ? (

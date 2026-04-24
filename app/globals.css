@@ -199,6 +199,19 @@ button { font-family: inherit; }
   }
 }
 
+/* Stories (/people): portraits stick while the body scrolls past.
+   Only on desktop — mobile already stacks and rotation/sticky would fight it. */
+@media (min-width: 769px) {
+  .jv-story-row {
+    min-height: 88vh;
+  }
+  .jv-story-portrait {
+    position: sticky;
+    top: 12vh;
+    align-self: start;
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

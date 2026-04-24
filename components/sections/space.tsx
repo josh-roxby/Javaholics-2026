@@ -51,7 +51,7 @@ export function SectionSpace() {
             className="jv-mono jv-caps jv-grid-header-meta"
             style={{ opacity: 0.45, whiteSpace: "nowrap" }}
           >
-            Fairview Strand, D03
+            Merville Ave, D03
           </div>
         </div>
 
@@ -101,7 +101,7 @@ export function SectionSpace() {
               className="jv-mono jv-caps"
               style={{ position: "absolute", bottom: 16, left: 16, right: 16, opacity: 0.45 }}
             >
-              A morning, Fairview Strand
+              A morning, Merville Ave
             </div>
             <div
               style={{

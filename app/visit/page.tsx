@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
+import { MapsLink } from "@/components/maps-link";
 
 export const metadata = { title: "Visit" };
 
@@ -70,9 +71,9 @@ export default function VisitPage() {
                   >
                     Address
                   </div>
-                  Fairview Strand
+                  Merville Ave, Fairview
                   <br />
-                  Dublin 3, D03 N2X8
+                  Dublin 3, D03 XK52
                 </div>
                 <div>
                   <div
@@ -99,14 +100,7 @@ export default function VisitPage() {
               <div
                 style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}
               >
-                <a
-                  className="btn btn-primary"
-                  href="https://maps.google.com/?q=Fairview+Strand+Dublin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open in maps
-                </a>
+                <MapsLink className="btn btn-primary">Open in maps</MapsLink>
                 <a className="btn btn-ghost" href="/coffee">
                   See the coffee
                 </a>
