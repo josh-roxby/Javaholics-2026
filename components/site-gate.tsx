@@ -22,6 +22,7 @@ export function SiteGate() {
     try {
       sessionStorage.setItem(STORAGE_KEY, "1");
     } catch {}
+    window.dispatchEvent(new CustomEvent("jv:enter"));
     setFading(true);
     setTimeout(() => setShown(false), 700);
   };
