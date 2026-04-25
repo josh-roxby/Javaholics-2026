@@ -7,4 +7,5 @@ export const MEDIA = {
   pour: "/media/cafe-pour.jpg",
   table: "/media/cafe-table.jpg",
   barista: "/media/cafe-barista.jpg",
+  coffeeBag: "/media/coffee-bag.png",
 } as const;

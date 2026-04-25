@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import { Bean } from "../bean";
 import { WobblyRule } from "../wobbly-rule";
 import { ROASTS, type Roast } from "@/lib/roasts";
+import { MEDIA } from "@/lib/media";
 
 type SectionCoffeeProps = {
   hideHeader?: boolean;
@@ -53,13 +54,13 @@ function RoastDetail({
         }}
       >
         <div>
-          <div style={{ color: "var(--roast)", marginBottom: 16 }}>
-            <Bean
-              size={60}
-              variant={index % 5}
-              color="var(--crema)"
-              fill="var(--roast)"
-              strokeWidth={1.2}
+          <div style={{ marginBottom: 16 }}>
+            <Image
+              src={MEDIA.coffeeBag}
+              alt={`${roast.name} bag`}
+              width={96}
+              height={128}
+              style={{ width: 96, height: "auto", display: "block" }}
             />
           </div>
           <div
