@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import { Bean } from "../bean";
 import { WobblyRule } from "../wobbly-rule";
 import { ROASTS, type Roast } from "@/lib/roasts";
+import { MEDIA } from "@/lib/media";
 
 type SectionCoffeeProps = {
   hideHeader?: boolean;
@@ -53,13 +54,13 @@ function RoastDetail({
         }}
       >
         <div>
-          <div style={{ color: "var(--roast)", marginBottom: 16 }}>
-            <Bean
-              size={60}
-              variant={index % 5}
-              color="var(--crema)"
-              fill="var(--roast)"
-              strokeWidth={1.2}
+          <div style={{ marginBottom: 16 }}>
+            <Image
+              src={MEDIA.coffeeBag}
+              alt={`${roast.name} bag`}
+              width={96}
+              height={128}
+              style={{ width: 96, height: "auto", display: "block" }}
             />
           </div>
           <div
@@ -231,42 +232,17 @@ export function SectionCoffee({
                 <span style={{ fontStyle: "italic", color: "var(--crema)" }}>one room.</span>
               </h2>
             </div>
-            <aside
+            <div
               style={{
                 maxWidth: 320,
-                padding: "22px 24px",
-                background: "rgba(232, 223, 201, 0.04)",
-                border: "1px solid var(--line)",
-                transform: "rotate(-1deg)",
-                position: "relative",
+                fontSize: 15,
+                lineHeight: 1.55,
+                color: "var(--ink-soft)",
               }}
             >
-              <div
-                className="jv-mono jv-caps"
-                style={{ opacity: 0.6, color: "var(--crema)", marginBottom: 12 }}
-              >
-                Dara&apos;s pick, this week
-              </div>
-              <div
-                style={{
-                  fontFamily: '"Fraunces", serif',
-                  fontStyle: "italic",
-                  fontSize: 19,
-                  lineHeight: 1.4,
-                  color: "var(--ink)",
-                  fontWeight: 400,
-                }}
-              >
-                &ldquo;The Kochere on a V60. First sip wakes you up. The second one tells you a
-                story.&rdquo;
-              </div>
-              <div
-                className="jv-mono jv-caps"
-                style={{ opacity: 0.55, marginTop: 14 }}
-              >
-                &mdash; D.
-              </div>
-            </aside>
+              A rotating bar of single origins, plus our own house blend. Grab a bag on the way
+              out, or sit with one.
+            </div>
           </div>
         )}
 

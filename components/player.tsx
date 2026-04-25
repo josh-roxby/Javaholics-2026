@@ -37,6 +37,14 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Auto-open the player when the user clears the enter gate so the
+  // playlist mounts on the first user gesture (autoplay-policy friendly).
+  useEffect(() => {
+    const onEnter = () => setOpen(true);
+    window.addEventListener("jv:enter", onEnter);
+    return () => window.removeEventListener("jv:enter", onEnter);
+  }, []);
+
   return (
     <PlayerContext.Provider value={{ open, setOpen, toggle }}>
       {children}
